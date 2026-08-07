@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Todo List</title>
+  <link rel="stylesheet" href="todo.css">
+</head>
+<body>
+  <header class="Header">
+    <h1>My Todo List</h1>
+    <p class="HeaderText">Organize your daily tasks and stay productive.</p>
+  </header>
+
+  <main>
+    <section class="FormSection">
+      <h2 class="SectionTitle">Add New Task</h2>
+
+      <form class="Form">
+        <div class="FormInfo">
+          <div class="InputRow">
+            <div class="FieldGroup">
+              <label class="FieldLabel">Task Name</label>
+              <input class="FieldControl TaskNameInput" type="text" placeholder="Enter task name">
+            </div>
+            <div class="FieldGroup">
+              <label class="FieldLabel">Importance</label>
+              <select class="FieldControl ImportanceInput">
+                <option value="">Select importance</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="InputRow">
+            <div class="FieldGroup">
+              <label class="FieldLabel">Date</label>
+              <input class="FieldControl DateInput" type="date">
+            </div>
+            <div class="FieldGroup">
+              <label class="FieldLabel">Time</label>
+              <input class="FieldControl TimeInput" type="time">
+            </div>
+          </div>
+
+          <div class="FieldGroup">
+            <label class="FieldLabel">Place</label>
+            <input class="FieldControl PlaceInput" type="text" placeholder="Enter place">
+          </div>
+
+          <div class="FieldGroup">
+            <label class="FieldLabel">Description</label>
+            <textarea class="FieldControl DescriptionInput" placeholder="Enter description" rows="4"></textarea>
+          </div>
+
+          <div class="Buttons FormButtons">
+            <button class="Button AddButton" type="button">Add Todo</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <section class="TasksSection">
+      <div class="TasksTop">
+        <h2 class="SectionTitle">My Tasks</h2>
+        <input class="SearchInput" type="search" placeholder="Search task...">
+      </div>
+
+      <div class="FilterRow">
+        <button class="FilterButton Active" type="button">All</button>
+        <button class="FilterButton" type="button">High</button>
+        <button class="FilterButton" type="button">Medium</button>
+        <button class="FilterButton" type="button">Low</button>
+      </div>
+
+      <div class="CardContainer">
+        <div class="TodoCard">
+          <div class="TodoInfo">
+            <div class="TodoTop">
+              <h3 class="TodoName">Finish project report</h3>
+              <span class="ImportanceHigh">High</span>
+            </div>
+
+            <p class="TodoDescription">
+              Complete the final draft of the quarterly project report and send it for review.
+            </p>
+
+            <div class="TodoDetails">
+              <div class="TodoMeta">
+                <h4>Date</h4>
+                <p class="TodoValue">2026-07-20</p>
+              </div>
+              <div class="TodoMeta">
+                <h4>Time</h4>
+                <p class="TodoValue">14:30</p>
+              </div>
+              <div class="TodoMeta">
+                <h4>Place</h4>
+                <p class="TodoValue">Office</p>
+              </div>
+              <div class="TodoMeta">
+                <h4>Status</h4>
+                <span class="PendingBadge">Pending</span>
+              </div>
+            </div>
+
+            <div class="Buttons TodoButtons">
+              <button class="Button CompleteButton" type="button">Complete</button>
+              <button class="Button DeleteButton" type="button">Delete</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="TodoCard">
+          <div class="TodoInfo">
+            <div class="TodoTop">
+              <h3 class="TodoName">Grocery shopping</h3>
+              <span class="ImportanceMedium">Medium</span>
+            </div>
+
+            <p class="TodoDescription">
+              Buy vegetables, milk, bread, and household essentials for the week.
+            </p>
+
+            <div class="TodoDetails">
+              <div class="TodoMeta">
+                <h4>Date</h4>
+                <p class="TodoValue">2026-07-19</p>
+              </div>
+              <div class="TodoMeta">
+                <h4>Time</h4>
+                <p class="TodoValue">10:00</p>
+              </div>
+              <div class="TodoMeta">
+                <h4>Place</h4>
+                <p class="TodoValue">Local Market</p>
+              </div>
+              <div class="TodoMeta">
+                <h4>Status</h4>
+                <span class="PendingBadge">Pending</span>
+              </div>
+            </div>
+
+            <div class="Buttons TodoButtons">
+              <button class="Button CompleteButton" type="button">Complete</button>
+              <button class="Button DeleteButton" type="button">Delete</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="TodoCard">
+          <div class="TodoInfo">
+            <div class="TodoTop">
+              <h3 class="TodoName">Morning walk</h3>
+              <span class="ImportanceLow">Low</span>
+            </div>
+
+            <p class="TodoDescription">
+              Take a 30-minute walk around the park to stay active and clear the mind.
+            </p>
+
+            <div class="TodoDetails">
+              <div class="TodoMeta">
+                <h4>Date</h4>
+                <p class="TodoValue">2026-07-18</p>
+              </div>
+              <div class="TodoMeta">
+                <h4>Time</h4>
+                <p class="TodoValue">07:00</p>
+              </div>
+              <div class="TodoMeta">
+                <h4>Place</h4>
+                <p class="TodoValue">City Park</p>
+              </div>
+              <div class="TodoMeta">
+                <h4>Status</h4>
+                <span class="CompletedBadge">Completed</span>
+              </div>
+            </div>
+
+            <div class="Buttons TodoButtons">
+              <button class="Button CompleteButton" type="button">Complete</button>
+              <button class="Button DeleteButton" type="button">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p class="FooterText">
+      © 2026 My Todo List. All rights reserved.
+    </p>
+  </footer>
+</body>
+<script src="todo.js"></script>
+</html>
