@@ -77,6 +77,11 @@ p {
   color: #a1a1aa;
 }
 
+.TaskInput {
+  min-height: 100px;
+  resize: vertical;
+}
+
 /* ========== Field Controls ========== */
 
 .FieldControl {
@@ -147,7 +152,7 @@ p {
 }
 
 .FilterButton:hover,
-.FilterButton.Active {
+.Active {
   background-color: white;
   color: #18181b;
   cursor: pointer;
@@ -194,8 +199,10 @@ p {
 
 .TodoName {
   font-size: 20px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
 }
-
 .TodoDetails {
   display: flex;
   flex-wrap: wrap;
@@ -333,6 +340,55 @@ p {
 .DeleteButton:hover {
   background-color: #f87171;
   color: #18181b;
+}
+
+.ShareButton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-color: #25d366;
+  color: #25d366;
+}
+
+.ShareButton:hover {
+  background-color: #25d366;
+  color: #18181b;
+}
+
+.ShareIcon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+}
+
+.ShareIcon img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 18px;
+  width: auto;
+  transition: opacity 0.2s;
+}
+
+.IconDefault {
+  opacity: 1;
+}
+
+.IconHover {
+  opacity: 0;
+}
+
+.ShareButton:hover .IconDefault {
+  opacity: 0;
+}
+
+.ShareButton:hover .IconHover {
+  opacity: 1;
 }
 
 /* ========== Modal ========== */

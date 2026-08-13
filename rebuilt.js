@@ -46,6 +46,20 @@ function load(){
   }
 }
 
+//loading data into array(storage) from local storage
+ storage = load();
+
+
+
+//Render after every change or render saved todos
+function render(arr){
+  container.innerHTML = ''
+  arr.forEach(todo => {
+  createcard(todo);
+});
+}
+
+render(storage);
 
 
 
@@ -75,15 +89,15 @@ function input(){// make object to use input
 }
 
 //Add todo and Update todo
-addButton.addEventListener("click", ()=>{//creating new todos
-    const data = input();//
+addButton.addEventListener("click", ()=>{
+    const data = input();//data getting from the form
     if(!data){return;}
     if (editingId){
       data.id = editingId; //As it got random Id, it gives same id of todo that we want to edit
       const todo = storage.find(t => t.id === editingId);
       Object.assign(todo, data); //Shortest way to edit the existing todo
       save();
-      render();
+      render(storage);
       addButton.textContent = 'Add Todo'; // restore button label
       editingId = null;       // exit edit mode       
       task.value = null;     // clear form
@@ -146,6 +160,13 @@ function createcard(data){
               <button class="Button CompleteButton" type="button">Complete</button>
               <button class="Button DeleteButton" type="button">Delete</button>
               <button class="Button EditButton" type="button">Edit</button>
+              <button class="Button ShareButton" type="button">
+                <span class="ShareIcon">
+                  <img src="Logo.svg" alt="" class="IconDefault">
+                  <img src="Logo (1).svg" alt="" class="IconHover">
+                </span>
+              </button>
+
             </div>
           </div>`
 
@@ -153,16 +174,7 @@ function createcard(data){
 }
 
 
-//Render after every change or render saved todos
-function render(){
-  container.innerHTML = ''
-  storage = load();
-  storage.forEach(todo => {
-  createcard(todo);
-});
-}
 
-render();
 
 
 //Confirmation to delete
@@ -173,7 +185,7 @@ confirmation.addEventListener("click",(e)=>{
     confirmation.hidden = true;
     pendingDeleteId = null;
     save();
-    render();  // re-render all
+    render(storage);
     }
   } else if(e.target.closest('.ModalCancelButton')){
     confirmation.hidden = true;
@@ -186,20 +198,20 @@ confirmation.addEventListener("click",(e)=>{
 
 
 
-//To Complete or Delete or Edit
+//Complete or Delete or Edit or share
 //This active listner work to indentify which todo is selected
-//closest() tells us any element with that class name from parents
+//With classlist dont add dot in brackets of function
 container.addEventListener("click", (e)=>{
   const card = e.target.closest('.TodoCard')
   if(!card){
     console.log("No card")
     return
   }
-//ans: we should also have to edit storage not only Ui(the real purpose of id is to connect Ui with storage)  
+//we should also have to edit storage not only Ui(the real purpose of id is to connect Ui with storage)  
   const id = card.dataset.id;
   const todo = storage.find(t => t.id === id);
   const badge = card.querySelector('.PendingBadge, .CompletedBadge');
-  const btn = e.target.closest('.CompleteButton, .UndoButton, .DeleteButton, .EditButton');
+  const btn = e.target.closest('.CompleteButton, .UndoButton, .DeleteButton, .EditButton, .ShareButton');
   if (btn.classList.contains('CompleteButton')) {
     todo.badge = 'Completed';
     badge.textContent = 'Completed';
@@ -219,7 +231,7 @@ container.addEventListener("click", (e)=>{
     pendingDeleteId = id;
     confirmation.hidden = false;//Enable overlay
     modalDelete.focus(); // focus the Delete button so Enter works
-}else if (btn.classList.contains('EditButton')){
+  }else if (btn.classList.contains('EditButton')){
     editingId = id;                // remember which todo we're now editing
     task.value = todo.taskval;     // fill the form with that todo's data
     importance.value = todo.importanceval;
@@ -228,5 +240,58 @@ container.addEventListener("click", (e)=>{
     place.value = todo.placeval;
     addButton.textContent = 'Update Todo'; // show the user they're editing
     task.focus();                  // jump to the form
+  } else if (btn.classList.contains('ShareButton')) {
+      const message =
+    `📌 ${todo.taskval}
+    Importance: ${todo.importanceval}
+    Date: ${todo.dateval}
+    Time: ${todo.timeval}
+    Place: ${todo.placeval}
+    Status: ${todo.badge}`;
+    const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
   }
 });
+
+
+//for search
+search.addEventListener("input", ()=>{
+  const searchval = search.value.toLowerCase().trim();
+  const filtered = storage.filter(todo =>
+    todo.taskval.toLowerCase().trim().includes(searchval)
+  )
+  render(filtered)
+})
+
+
+//filter buttons
+filterRow.addEventListener("click", (e)=>{
+  console.log('Iam clicked')
+  const all = e.target.closest('.All')
+  const high = e.target.closest('.High');
+  const medium = e.target.closest('.Medium');
+  const low = e.target.closest('.Low');
+  if(all){
+    render(storage)
+  
+  }
+  if(high){
+    const filtered = storage.filter(todo => todo.importanceval.includes("High"))
+  
+
+    render(filtered)
+  }
+  else if(medium){
+    const filtered = storage.filter(todo => todo.importanceval.includes("Medium"))
+    render(filtered)
+
+  }
+  else if(low){
+    const filtered = storage.filter(todo => todo.importanceval.includes("Low"))
+    render(filtered)
+
+  }
+})
+
+
+//share button
