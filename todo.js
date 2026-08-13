@@ -10,7 +10,7 @@ const search = document.querySelector('.SearchInput');
 const filterrow = document.querySelector('.FilterRow');
 const container = document.querySelector('.CardContainer')
 
-let todos = [];
+let todos = []
 
 let currentsearch = ""
 

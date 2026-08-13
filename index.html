@@ -54,13 +54,18 @@
             <label class="FieldLabel">Description</label>
             <textarea class="FieldControl DescriptionInput" placeholder="Enter description" rows="4"></textarea>
           </div>
-
           <div class="Buttons FormButtons">
             <button class="Button AddButton" type="button">Add Todo</button>
           </div>
         </div>
       </form>
     </section>
+
+
+
+
+
+
 
     <section class="TasksSection">
       <div class="TasksTop">
@@ -75,6 +80,10 @@
         <button class="FilterButton" type="button">Low</button>
       </div>
 
+
+
+
+
       <div class="CardContainer">
         <div class="TodoCard">
           <div class="TodoInfo">
@@ -82,10 +91,6 @@
               <h3 class="TodoName">Finish project report</h3>
               <span class="ImportanceHigh">High</span>
             </div>
-
-            <p class="TodoDescription">
-              Complete the final draft of the quarterly project report and send it for review.
-            </p>
 
             <div class="TodoDetails">
               <div class="TodoMeta">
@@ -120,10 +125,6 @@
               <span class="ImportanceMedium">Medium</span>
             </div>
 
-            <p class="TodoDescription">
-              Buy vegetables, milk, bread, and household essentials for the week.
-            </p>
-
             <div class="TodoDetails">
               <div class="TodoMeta">
                 <h4>Date</h4>
@@ -156,10 +157,6 @@
               <h3 class="TodoName">Morning walk</h3>
               <span class="ImportanceLow">Low</span>
             </div>
-
-            <p class="TodoDescription">
-              Take a 30-minute walk around the park to stay active and clear the mind.
-            </p>
 
             <div class="TodoDetails">
               <div class="TodoMeta">
@@ -195,6 +192,18 @@
       © 2026 My Todo List. All rights reserved.
     </p>
   </footer>
+
+  <!-- Custom confirm modal (replaces native confirm()) -->
+  <div class="ModalOverlay" hidden>
+    <div class="Modal" role="dialog" aria-modal="true" aria-labelledby="ModalTitle">
+      <h3 id="ModalTitle" class="ModalTitle">Delete this task?</h3>
+      <p class="ModalText">This action cannot be undone.</p>
+      <div class="Buttons ModalButtons">
+        <button class="Button ModalCancelButton" type="button">Cancel</button>
+        <button class="Button ModalDeleteButton" type="button">Delete</button>
+      </div>
+    </div>
+  </div>
 </body>
-<script src="todo.js"></script>
+<script src="rebuilt.js"></script>
 </html>

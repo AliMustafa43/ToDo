@@ -276,6 +276,7 @@ p {
   color: #bbf7d0;
 }
 
+
 /* ========== Buttons ========== */
 
 .Buttons {
@@ -311,6 +312,16 @@ p {
   color: white;
 }
 
+.EditButton{
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.EditButton:hover{
+  background-color: #ffffff;
+  color: #18181b;
+}
+
 .CompleteButton {
   border-color: #86efac;
   color: #86efac;
@@ -321,12 +332,84 @@ p {
   color: #18181b;
 }
 
+.UndoButton{
+  border-color: #4073ff;
+  color: #4073ff;
+}
+
+.UndoButton:hover{
+  background-color: #4073ff;
+  color:#18181b ;
+}
+
 .DeleteButton {
   border-color: #f87171;
   color: #f87171;
 }
 
 .DeleteButton:hover {
+  background-color: #f87171;
+  color: #18181b;
+}
+
+/* ========== Modal ========== */
+
+/* hidden attribute normally means display:none, but our display:flex
+   below overrides it — so we re-apply it explicitly here */
+.ModalOverlay[hidden] {
+  display: none;
+}
+
+.ModalOverlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+}
+
+.Modal {
+  width: 360px;
+  max-width: 90%;
+  padding: 24px;
+  border: 2px solid #3f3f46;
+  border-radius: 18px;
+  background-color: #27272a;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.ModalTitle {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.ModalText {
+  color: #a1a1aa;
+  margin-bottom: 20px;
+}
+
+.ModalButtons {
+  justify-content: flex-end;
+}
+
+.ModalCancelButton {
+  border-color: #a1a1aa;
+  color: #a1a1aa;
+}
+
+.ModalCancelButton:hover {
+  background-color: #a1a1aa;
+  color: #18181b;
+}
+
+.ModalDeleteButton {
+  border-color: #f87171;
+  color: #f87171;
+}
+
+.ModalDeleteButton:hover {
   background-color: #f87171;
   color: #18181b;
 }
