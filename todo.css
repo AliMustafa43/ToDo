@@ -94,11 +94,6 @@ p {
   border-color: white;
 }
 
-.DescriptionInput {
-  min-height: 110px;
-  resize: vertical;
-}
-
 /* ========== Tasks Section ========== */
 
 .TasksSection {
@@ -201,18 +196,6 @@ p {
   font-size: 20px;
 }
 
-.TodoDescription {
-  min-height: 90px;
-  max-height: 120px;
-  padding: 12px;
-  border: 1px solid #52525b;
-  border-radius: 10px;
-  background-color: #18181b;
-  color: #e4e4e7;
-  overflow-y: auto;
-  line-height: 1.5;
-}
-
 .TodoDetails {
   display: flex;
   flex-wrap: wrap;
@@ -257,8 +240,8 @@ p {
 }
 
 .ImportanceMedium {
-  background-color: #78350f;
-  color: #fde68a;
+  background-color: #0f5a78;
+  color: #96defa;
 }
 
 .ImportanceLow {
@@ -267,8 +250,8 @@ p {
 }
 
 .PendingBadge {
-  background-color: #1e3a8a;
-  color: #dbeafe;
+  background-color: #ffe100;
+  color: #000000;
 }
 
 .CompletedBadge {
@@ -333,12 +316,12 @@ p {
 }
 
 .UndoButton{
-  border-color: #4073ff;
-  color: #4073ff;
+  border-color: #ffe100;
+  color: #ffe100;
 }
 
 .UndoButton:hover{
-  background-color: #4073ff;
+  background-color: #ffe100;
   color:#18181b ;
 }
 

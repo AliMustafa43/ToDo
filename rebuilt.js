@@ -1,11 +1,10 @@
 // first we get elements from html that we actually needed
 
-let name = document.querySelector('.TaskNameInput');
+let task = document.querySelector('.TaskInput');
 let importance = document.querySelector('.ImportanceInput');
 let date = document.querySelector('.DateInput');
 let time = document.querySelector('.TimeInput');
 let place = document.querySelector('.PlaceInput');
-let description = document.querySelector('.DescriptionInput');
 const addButton = document.querySelector('.AddButton');
 
 const search = document.querySelector('.SearchInput');
@@ -17,6 +16,8 @@ const container = document.querySelector('.CardContainer')
 const confirmation = document.querySelector('.ModalOverlay');
 const modalCancel = document.querySelector('.ModalCancelButton');
 const modalDelete = document.querySelector('.ModalDeleteButton');
+
+//the major purpose of them is to enable and disable feature
 let pendingDeleteId = null; // id of the todo waiting for delete confirmation
 let editingId = null; // id of the todo being edited, null when adding a new one
 
@@ -46,41 +47,29 @@ function load(){
 }
 
 
-//Render after every change
-function render(){
-  container.innerHTML = ''
-  storage = load();
-  storage.forEach(todo => {
-  createcard(todo);
-});
-}
-
-render();
 
 
 
 function input(){// make object to use input 
-    const nameval = name.value;
+    const taskval = task.value;
     const importanceval = importance.value;
     const dateval = date.value;
     const timeval = time.value;
     const placeval = place.value;
-    const descriptionval = description.value;
     const badge = "Pending"
 
-    if(!nameval||!importanceval||!dateval){
-      alert("Fill these sections name, importance, date")
+    if(!taskval||!importanceval||!dateval){
+      alert("Fill these sections task, importance, date")
       return null // tell the caller validation failed
     }
 
     return{
     id: crypto.randomUUID(),
-    nameval,
+    taskval,
     importanceval,
     dateval,
     timeval,
     placeval,
-    descriptionval,
     badge
   }
 }
@@ -95,8 +84,13 @@ addButton.addEventListener("click", ()=>{//creating new todos
       Object.assign(todo, data); //Shortest way to edit the existing todo
       save();
       render();
-      editingId = null;                   // exit edit mode
       addButton.textContent = 'Add Todo'; // restore button label
+      editingId = null;       // exit edit mode       
+      task.value = null;     // clear form
+      importance.value = null;
+      date.value = null;
+      time.value = null;
+      place.value = null;
       return;
     }
 
@@ -106,17 +100,28 @@ addButton.addEventListener("click", ()=>{//creating new todos
 })
 
 
+function importanceColor(importanceval){
+  if(importanceval === "Medium"){
+    return "ImportanceMedium";
+  }
+  else if(importanceval === "High"){
+    return "ImportanceHigh";
+  }
+  else if(importanceval === "Low"){
+    return "ImportanceLow";
+  }
+}
+
+
 function createcard(data){
   const card = document.createElement('div');
   card.className = "TodoCard";
   card.dataset.id = data.id;
   card.innerHTML = `<div class="TodoInfo">
             <div class="TodoTop">
-              <h3 class="TodoName">${data.nameval}</h3>
-              <span class="ImportanceHigh">${data.importanceval}</span>
+              <h3 class="TodoName">${data.taskval}</h3>
+              <span class="${importanceColor(data.importanceval)}">${data.importanceval}</span>
             </div>
-
-            <p class="TodoDescription">${data.descriptionval}</p>
 
             <div class="TodoDetails">
               <div class="TodoMeta">
@@ -143,9 +148,22 @@ function createcard(data){
               <button class="Button EditButton" type="button">Edit</button>
             </div>
           </div>`
+
   container.appendChild(card);
-  
 }
+
+
+//Render after every change or render saved todos
+function render(){
+  container.innerHTML = ''
+  storage = load();
+  storage.forEach(todo => {
+  createcard(todo);
+});
+}
+
+render();
+
 
 //Confirmation to delete
 confirmation.addEventListener("click",(e)=>{
@@ -203,13 +221,12 @@ container.addEventListener("click", (e)=>{
     modalDelete.focus(); // focus the Delete button so Enter works
 }else if (btn.classList.contains('EditButton')){
     editingId = id;                // remember which todo we're now editing
-    name.value = todo.nameval;     // fill the form with that todo's data
+    task.value = todo.taskval;     // fill the form with that todo's data
     importance.value = todo.importanceval;
     date.value = todo.dateval;
     time.value = todo.timeval;
     place.value = todo.placeval;
-    description.value = todo.descriptionval;
     addButton.textContent = 'Update Todo'; // show the user they're editing
-    name.focus();                  // jump to the form
+    task.focus();                  // jump to the form
   }
 });
