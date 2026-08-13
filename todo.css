@@ -82,6 +82,15 @@ p {
   resize: vertical;
 }
 
+.DateInput::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+.TimeInput::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
 /* ========== Field Controls ========== */
 
 .FieldControl {
